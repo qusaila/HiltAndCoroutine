@@ -18,26 +18,24 @@ import kotlinx.coroutines.flow.collect
 class MainActivity : AppCompatActivity() {
     val  model:MainViewModel by viewModels()
   lateinit  var mainAdapter:MainAdapter
-    var posts:ArrayList<Post>?=null
-  lateinit  var  layoutMange:LinearLayoutManager
+   lateinit  var  layoutMange:LinearLayoutManager
   lateinit  var bind:ActivityMainBinding
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
          bind=DataBindingUtil.setContentView(this,R.layout.activity_main)
-         posts= ArrayList()
-         model.getPost()
+          model.getPost()
          bind.rv.setHasFixedSize(true)
          layoutMange= LinearLayoutManager(this)
          layoutMange.orientation=LinearLayoutManager.VERTICAL
          bind.rv.layoutManager= layoutMange
-         mainAdapter= MainAdapter(posts!!)
+         mainAdapter= MainAdapter(ArrayList())
          bind.rv.adapter=mainAdapter
 
          lifecycleScope.launchWhenStarted {
             model.getposts().collect {
             if (it!=null){
-                posts!!.addAll(it)
-                mainAdapter.notifyList(posts!!)
+
+                mainAdapter.notifyList(it!!)
              }
         } }
 
