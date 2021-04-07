@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.coroutine.data.model.Post
 import com.example.hiltwithroomandcoroutine.listeners.ResponseListener
 import com.example.myapplicationtest.BaseApplication
+import com.example.myapplicationtest.base.BaseViewModel
 import com.example.myapplicationtest.reposetory.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -18,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel : ViewModel {
+class MainViewModel : BaseViewModel {
     var repository: Repository
     lateinit var mutableStateFlow: MutableStateFlow<ArrayList<Post>>
 
@@ -28,21 +29,14 @@ class MainViewModel : ViewModel {
         mutableStateFlow = MutableStateFlow(ArrayList())
         if (isInternetConnected(BaseApplication.instance)) {
             getPost()
-
-        } else {
+         } else {
             getAllPosts()
 
         }
 
     }
 
-    @Inject
-    fun isInternetConnected( application: Application): Boolean {
-        val conMgr =
-            application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val netInfo = conMgr.activeNetworkInfo
-        return if (netInfo == null) false else true
-    }
+
 
     fun getPost() = viewModelScope.launch {
         repository.getPost(object : ResponseListener {
