@@ -1,8 +1,6 @@
 package com.example.myapplicationtest.ui
 
-import android.database.DatabaseUtils
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -36,7 +34,7 @@ class MainActivity : AppCompatActivity() {
          bind.rv.adapter=mainAdapter
 
          lifecycleScope.launchWhenStarted {
-            model.getTitle().collect {
+            model.getposts().collect {
             if (it!=null){
                 posts!!.addAll(it)
                 mainAdapter.notifyList(posts!!)

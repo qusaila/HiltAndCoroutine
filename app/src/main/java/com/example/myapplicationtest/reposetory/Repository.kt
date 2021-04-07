@@ -18,13 +18,14 @@ import javax.inject.Inject
 class Repository {
 
     var apiService: ApiServices
-//    var postDao: PostDao
-
+    var postDao: PostDao
+var posts:ArrayList<Post>
     @Inject
-    constructor(apiService: ApiServices ) {
+    constructor(apiService: ApiServices ,postDao: PostDao) {
         this.apiService = apiService
-//        this.postDao = postDao
+        this.postDao = postDao
 
+        posts= ArrayList()
 
     }
 
@@ -32,7 +33,7 @@ class Repository {
         try {
             val response = apiService.getPosts()
             if (response.isSuccessful) {
-//                addPosts(response.body()!!)
+            addPosts(response.body()!!)
 
                 responseListener.sucess(response.body()!!)
 
@@ -44,8 +45,13 @@ class Repository {
         }
 
     }
-fun addPosts(posts:ArrayList<Post>){
-//    postDao.addPosts(posts)
+suspend fun addPosts(posts:ArrayList<Post>){
+    posts.addAll(posts)
+    postDao.addPosts(posts)
+}
+suspend  fun getAllPosts():ArrayList<Post>{
+
+    return postDao.getAllPosts() as ArrayList<Post>
 }
 
 }

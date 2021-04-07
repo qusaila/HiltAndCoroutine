@@ -2,6 +2,7 @@ package com.example.myapplicationtest.db
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.coroutine.data.model.Post
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,11 +10,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 @Dao
 interface PostDao {
-@Query("select * from posts")
-fun getAllPosts():MutableStateFlow<ArrayList<Post>>
+    @Query("select * from postTable")
+   suspend fun getAllPosts(): List<Post>
 
-    @Insert
-fun addPosts(posts:ArrayList<Post>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+   suspend fun addPosts(posts: List<Post>)
 
 
 }

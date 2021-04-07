@@ -29,23 +29,23 @@ object AppModule {
             .build()
             .create(ApiServices::class.java)
     }
-//    @Provides
-//    @Singleton
-//    fun localDb(application: Application): RoomDb {
-//
-//        return Room.databaseBuilder(
-//            application,
-//             RoomDb::class.java,
-//            "post_db"
-//        )
-//            .fallbackToDestructiveMigration()
-//             .build()
-//
-//    }
-//    @Provides
-//    @Singleton
-//    fun provideDao(roomDb: RoomDb): PostDao {
-//
-//        return roomDb.postDao()
-//    }
+    @Provides
+    @Singleton
+    fun localDb(application: Application): RoomDb {
+
+        return Room.databaseBuilder(
+            application,
+             RoomDb::class.java,
+            "post_db"
+        )
+            .fallbackToDestructiveMigration()
+             .build()
+
+    }
+    @Provides
+    @Singleton
+    fun provideDao(roomDb: RoomDb): PostDao {
+
+        return roomDb.postDao()
+    }
 }
