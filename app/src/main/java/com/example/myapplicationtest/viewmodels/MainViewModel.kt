@@ -1,18 +1,13 @@
 package com.example.hiltwithroomandcoroutine.ui
 
-import android.app.Application
-import android.content.Context
-import android.net.ConnectivityManager
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coroutine.data.model.Post
 import com.example.hiltwithroomandcoroutine.listeners.ResponseListener
 import com.example.myapplicationtest.BaseApplication
 import com.example.myapplicationtest.base.BaseViewModel
-import com.example.myapplicationtest.reposetory.Repository
+import com.example.myapplicationtest.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

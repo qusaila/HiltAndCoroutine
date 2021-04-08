@@ -10,12 +10,13 @@ import com.example.coroutine.data.model.Post
 import com.example.hiltwithroomandcoroutine.ui.MainViewModel
 import com.example.myapplicationtest.R
 import com.example.myapplicationtest.adapters.MainAdapter
+import com.example.myapplicationtest.base.BaseActivity
 import com.example.myapplicationtest.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     val  model:MainViewModel by viewModels()
   lateinit  var mainAdapter:MainAdapter
    lateinit  var  layoutMange:LinearLayoutManager
